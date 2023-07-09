@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class BaseDatos extends SQLiteOpenHelper {
 
     public BaseDatos(Context context){
-        super(context,"hoteles.db",null,1);
+        super(context,"hoteles_V2.db",null,2);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -57,12 +57,13 @@ public class BaseDatos extends SQLiteOpenHelper {
                 "descripcion TEXT NOT NULL,"+
                 "latitud TEXT NOT NULL,"+
                 "longitud TEXT NOT NULL,"+
+                "destino String NOT NULL,"+
                 "direccion TEXT NOT NULL)";
 
         db.execSQL(query);
 
-        query ="INSERT INTO hotel VALUES(NULL,'Hotel Monasterio San Pedro','-13.519384430837409','-71.98409123795426',' Cascaparo 116, Cusco 08002');";
-        query ="INSERT INTO hotel VALUES(NULL,'Mint Hotel','-13.51504486681824','-71.96907086736691','C-12 Urbanizacion, San Isidro, Arequipa');";
+        query ="INSERT INTO hotel VALUES(NULL,'Hotel Monasterio San Pedro','-13.519384430837409','-71.98409123795426','CUSCO',' Cascaparo 116- Cusco 08002');";
+        query ="INSERT INTO hotel VALUES(NULL,'Mint Hotel','-13.51504486681824','-71.96907086736691','AREQUIPA','C-12 Urbanizacion San Isidro-Arequipa');";
 
         db.execSQL(query);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,13 +74,14 @@ public class BaseDatos extends SQLiteOpenHelper {
                 "idHotal INTEGER,"+
                 "idTipoHabitaciones INTEGER,"+
                 "precio DOUBLE NOT NULL,"+
+                "destino String NOT NULL,"+
                 "disponible INTEGER NOT NULL)";
 
         db.execSQL(query);
 
-        query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 1','1','1',1000,1);";
-        query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 2','2','2',1000,1);";
-        query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 3','2','3',1000,1);";
+        query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 1','1','1',1000,'CUSCO',1);";
+        query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 2','2','2',1000,'AREQUIPA',1);";
+        query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 3','2','3',1000,'AREQUIPA',1);";
 
         db.execSQL(query);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
