@@ -31,22 +31,26 @@
         <activity
             android:name=".MapaHotelActivity"
             android:exported="true">
+
         </activity>
 
         <activity
             android:name=".BuscarHotelActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".RegistraReservaActivity"
+            android:exported="false">
         </activity>
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

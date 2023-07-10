@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,79 +32,67 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapaHotelActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Geocoder geocoder;
-    float latitud,longitud;
-    String titulo;
+    private TextView txtNombHotel;
+    private TextView tvPrecHotel;
+    private HashMap<Marker, LocationInfo> markerLocationMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_hotel);
 
+        txtNombHotel = (TextView) findViewById(R.id.txtNombHotel);
+        tvPrecHotel = (TextView) findViewById(R.id.tvPrecHotel);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapabusqueda);
         mapFragment.getMapAsync(this);
         geocoder = new Geocoder(this);
+
+        markerLocationMap = new HashMap<>();
+
+        mostrarReserva();
     }
 
     @Override
 
-    /*
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-
-        mMap = googleMap;
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-
-        // LatLng upc = new LatLng(latitud, longitud);
-        LatLng upc = new LatLng(-13.51504486681824, -71.96907086736691);
-        mMap.addMarker(new MarkerOptions()
-                .position(upc)
-                .title("prueba")
-                .icon(cambiarIcono(this,R.drawable.ico_hotel))
-        );
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(upc,17));
-
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(@NonNull LatLng latLng) {
-                // Log.d("==>",latLng.toString());
-
-                try {
-                    List<Address> listaDirecciones = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
-                    if (listaDirecciones.size() > 0){
-                        Address direccion = listaDirecciones.get(0);
-                        String nombreDireccion = direccion.getAddressLine(0);
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(nombreDireccion));
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-    }
-    */
-
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+   public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         ArrayList<LocationInfo> ubicaciones = new ArrayList<>();
-        ubicaciones.add(new LocationInfo(-13.51504486681824, -71.96907086736691, "Ubicación 1", "Nombre 1"));
-        ubicaciones.add(new LocationInfo(-13.520346, -71.964522, "Ubicación 2", "Nombre 2"));
-        ubicaciones.add(new LocationInfo(-13.522123, -71.967821, "Ubicación 3", "Nombre 3"));
+        ubicaciones.add(new LocationInfo(-13.51504486681824, -71.96907086736691, "Hotel San Pedro", "150.00", 1, "2023-07-01", "2023-07-05"));
+        ubicaciones.add(new LocationInfo(-13.520346, -71.966522, "Kutimuy Qosqo", "100.00", 2, "2023-07-02", "2023-07-06"));
+        ubicaciones.add(new LocationInfo(-13.522123, -71.967821, "Nuevo Horizonte", "89.00", 3, "2023-07-03", "2023-07-07"));
+        ubicaciones.add(new LocationInfo(-13.524123, -71.957821, "Las Praderas", "98.00", 3, "2023-07-03", "2023-07-07"));
 
         for (LocationInfo ubicacion : ubicaciones) {
-            mMap.addMarker(new MarkerOptions()
+            Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(ubicacion.getLatitud(), ubicacion.getLongitud()))
                     .title(ubicacion.getTitulo())
                     .icon(cambiarIcono(this, R.drawable.ico_hotel)));
+
+            // Asocia el marcador con la ubicación correspondiente
+            markerLocationMap.put(marker, ubicacion);
         }
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                LocationInfo locationInfo = markerLocationMap.get(marker);
+                if (locationInfo != null) {
+                    txtNombHotel.setText(locationInfo.getTitulo());
+                    tvPrecHotel.setText("S/. "+ String.valueOf(locationInfo.getPrecio()));
+                }
+                return false;
+            }
+        });
 
         // Listener para detectar el evento de finalización del diseño
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
@@ -118,21 +108,6 @@ public class MapaHotelActivity extends FragmentActivity implements OnMapReadyCal
             }
         });
 
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(@NonNull LatLng latLng) {
-                try {
-                    List<Address> listaDirecciones = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                    if (!listaDirecciones.isEmpty()) {
-                        Address direccion = listaDirecciones.get(0);
-                        String nombreDireccion = direccion.getAddressLine(0);
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(nombreDireccion));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     private BitmapDescriptor cambiarIcono(Context context, int id){
@@ -143,5 +118,16 @@ public class MapaHotelActivity extends FragmentActivity implements OnMapReadyCal
         imagen.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
 
+    }
+
+    private void mostrarReserva(){
+        Button btnMostrarDetalle = findViewById(R.id.verDetalle);
+        btnMostrarDetalle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapaHotelActivity.this, RegistraReservaActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
