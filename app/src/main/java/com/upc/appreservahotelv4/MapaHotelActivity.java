@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -54,6 +56,8 @@ public class MapaHotelActivity extends FragmentActivity implements OnMapReadyCal
         geocoder = new Geocoder(this);
 
         markerLocationMap = new HashMap<>();
+
+        mostrarReserva();
     }
 
     @Override
@@ -63,9 +67,10 @@ public class MapaHotelActivity extends FragmentActivity implements OnMapReadyCal
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         ArrayList<LocationInfo> ubicaciones = new ArrayList<>();
-        ubicaciones.add(new LocationInfo(-13.51504486681824, -71.96907086736691, "Hotel 1", "150.00", 1, "2023-07-01", "2023-07-05"));
-        ubicaciones.add(new LocationInfo(-13.520346, -71.964522, "Hotel 2", "100.00", 2, "2023-07-02", "2023-07-06"));
-        ubicaciones.add(new LocationInfo(-13.522123, -71.967821, "Hotel 3", "89.00", 3, "2023-07-03", "2023-07-07"));
+        ubicaciones.add(new LocationInfo(-13.51504486681824, -71.96907086736691, "Hotel San Pedro", "150.00", 1, "2023-07-01", "2023-07-05"));
+        ubicaciones.add(new LocationInfo(-13.520346, -71.966522, "Kutimuy Qosqo", "100.00", 2, "2023-07-02", "2023-07-06"));
+        ubicaciones.add(new LocationInfo(-13.522123, -71.967821, "Nuevo Horizonte", "89.00", 3, "2023-07-03", "2023-07-07"));
+        ubicaciones.add(new LocationInfo(-13.524123, -71.957821, "Las Praderas", "98.00", 3, "2023-07-03", "2023-07-07"));
 
         for (LocationInfo ubicacion : ubicaciones) {
             Marker marker = mMap.addMarker(new MarkerOptions()
@@ -113,5 +118,16 @@ public class MapaHotelActivity extends FragmentActivity implements OnMapReadyCal
         imagen.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
 
+    }
+
+    private void mostrarReserva(){
+        Button btnMostrarDetalle = findViewById(R.id.verDetalle);
+        btnMostrarDetalle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapaHotelActivity.this, RegistraReservaActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
