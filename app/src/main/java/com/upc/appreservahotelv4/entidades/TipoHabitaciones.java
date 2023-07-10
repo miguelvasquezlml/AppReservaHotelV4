@@ -1,5 +1,7 @@
 package com.upc.appreservahotelv4.entidades;
 
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 
 public class TipoHabitaciones {
