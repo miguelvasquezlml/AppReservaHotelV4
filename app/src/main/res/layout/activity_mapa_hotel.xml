@@ -31,22 +31,59 @@
         <LinearLayout
             android:layout_width="208dp"
             android:layout_height="122dp"
-            android:padding="10px">
+            android:padding="10px"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtNombHotel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="178dp"
+                android:layout_height="30dp"
                 android:text="Hotel San Pedro"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:orientation="vertical"
+                android:textAlignment="center">
+
+                <TextView
+                    android:id="@+id/tvPrecHotel"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:text="S/. 450.00"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:background="#4CAF50"
+                    android:textColor="@color/white"
+                    />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="Detalle"
+                    android:textAlignment="center">
+                </Button>
+            </LinearLayout>
+
+
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="135dp"
-            android:layout_height="120dp">
+            android:layout_height="120dp"
+            android:padding="30px">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/hab1">
 
+            </ImageView>
         </LinearLayout>
 
 
