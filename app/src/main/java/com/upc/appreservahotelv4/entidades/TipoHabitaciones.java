@@ -1,5 +1,7 @@
 package com.upc.appreservahotelv4.entidades;
 
+import androidx.annotation.NonNull;
+
 public class TipoHabitaciones {
 
     private int idTipoHabitaciones;
@@ -24,5 +26,11 @@ public class TipoHabitaciones {
 
     public void setTipoHabitaciones(String tipoHabitaciones) {
         this.tipoHabitaciones = tipoHabitaciones;
+    }
+
+    @NonNull
+    @Override
+    public String toString(){
+        return tipoHabitaciones;
     }
 }

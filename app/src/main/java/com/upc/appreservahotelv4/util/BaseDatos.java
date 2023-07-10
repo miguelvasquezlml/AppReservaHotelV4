@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class BaseDatos extends SQLiteOpenHelper {
 
     public BaseDatos(Context context){
-        super(context,"hoteles_V2.db",null,2);
+        super(context,"hoteles_V3.db",null,2);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -17,10 +17,12 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(query);
 
         query ="INSERT INTO tipoHabitaciones VALUES(NULL,'SUIT');";
+        db.execSQL(query);
         query ="INSERT INTO tipoHabitaciones VALUES(NULL,'MATRIMONIAL');";
+        db.execSQL(query);
         query ="INSERT INTO tipoHabitaciones VALUES(NULL,'DOBLES');";
+        db.execSQL(query);
         query ="INSERT INTO tipoHabitaciones VALUES(NULL,'PERSONAL');";
-
         db.execSQL(query);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,9 +34,10 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(query);
 
         query ="INSERT INTO login VALUES(NULL,'1','immiguelvasquez@gmail.com','123456');";
+        db.execSQL(query);
         query ="INSERT INTO login VALUES(NULL,'2','droman8427@gmail.co','123456');";
+        db.execSQL(query);
         query ="INSERT INTO login VALUES(NULL,'3','ravila2271@gmail.com','123456');";
-
         db.execSQL(query);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
         query ="CREATE TABLE usuario("+
@@ -45,9 +48,10 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(query);
 
         query ="INSERT INTO usuario VALUES(NULL,'MIGUEL','VASQUEZ');";
+        db.execSQL(query);
         query ="INSERT INTO usuario VALUES(NULL,'DANIEL','ROMAN');";
+        db.execSQL(query);
         query ="INSERT INTO usuario VALUES(NULL,'ROBERTO','AVILA');";
-
         db.execSQL(query);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,8 +67,8 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(query);
 
         query ="INSERT INTO hotel VALUES(NULL,'Hotel Monasterio San Pedro','-13.519384430837409','-71.98409123795426','CUSCO',' Cascaparo 116- Cusco 08002');";
+        db.execSQL(query);
         query ="INSERT INTO hotel VALUES(NULL,'Mint Hotel','-13.51504486681824','-71.96907086736691','AREQUIPA','C-12 Urbanizacion San Isidro-Arequipa');";
-
         db.execSQL(query);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,9 +84,10 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(query);
 
         query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 1','1','1',1000,'CUSCO',1);";
+        db.execSQL(query);
         query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 2','2','2',1000,'AREQUIPA',1);";
+        db.execSQL(query);
         query ="INSERT INTO habitacion VALUES(NULL,'Habitacion 3','2','3',1000,'AREQUIPA',1);";
-
         db.execSQL(query);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
         query ="CREATE TABLE reservas("+
@@ -100,8 +105,6 @@ public class BaseDatos extends SQLiteOpenHelper {
         query ="INSERT INTO habitacion VALUES(NULL,'ROBERTO','AVILA');";*/
 
         db.execSQL(query);
-
-
     }
 
     @Override
