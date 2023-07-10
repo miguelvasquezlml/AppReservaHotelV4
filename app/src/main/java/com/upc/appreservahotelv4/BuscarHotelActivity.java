@@ -44,23 +44,27 @@ public class BuscarHotelActivity extends AppCompatActivity {
     }
 
     private void buscarHoteles(){
+
         btnBuscar = findViewById(R.id.btnBuscar);
         btnBuscar.setOnClickListener(v ->{
+            boolean valida = true;
             EditText editText = findViewById(R.id.txtDestino);
             String valDestino = editText.getText().toString();
-
             Spinner spinner = findViewById(R.id.spTipoHabitacion);
 
-
             TipoHabitaciones hab=(TipoHabitaciones)  spinner.getSelectedItem();
-
             Integer valTipHab =hab.getIdTipoHabitaciones();
 
+            if(valDestino.equals("")){
+                editText.setError("Desbes ingresar un destino");
+                valida=false;
+            }
+            if(valida){
             Intent intent= new Intent(this,ListaHabitacionesActivity.class);
             intent.putExtra("varDestino",valDestino.toString() +"");
             intent.putExtra("varTipHab",valTipHab.toString() );
             Toast.makeText(this, "Hiciste click en el boton", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+            startActivity(intent);}
 
         });
     }

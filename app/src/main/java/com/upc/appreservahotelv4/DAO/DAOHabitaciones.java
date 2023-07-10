@@ -27,8 +27,11 @@ public class DAOHabitaciones {
 
     public List<Habitacion> cargarHabitaciones(String varDestino, Integer varTipHab){
         List<Habitacion> listaHabitacion= new ArrayList<>();
-        try {
-            Cursor c= db.rawQuery("SELECT * FROM habitacion WHERE destino = " + "'varDestino'" + "AND idTipoHabitaciones = " + "'varDestino'" ,null);
+        try
+        {
+            //String query = "SELECT * FROM habitacion WHERE destino = '" + varDestino + "' AND idTipoHabitaciones = '" + tipoHabitacion + "'";
+
+            Cursor c= db.rawQuery("SELECT * FROM habitacion WHERE destino = '" + varDestino + "' AND idTipoHabitaciones = " + varTipHab +"" ,null);
             while (c.moveToNext()){
                 listaHabitacion.add(new Habitacion(
                         c.getInt(0),

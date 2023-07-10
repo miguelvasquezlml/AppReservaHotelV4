@@ -40,7 +40,7 @@ public class ListaHabitacionesActivity extends AppCompatActivity {
     }
     private void cargarHabitaciones(String varDestino, Integer varTipHab){
         daoHabitaciones.abrirDB();
-        listaHabitaciones= daoHabitaciones.cargarHabitaciones(varDestino,Integer.parseInt(varTipHab));
+        listaHabitaciones= daoHabitaciones.cargarHabitaciones(varDestino,varTipHab);
         AdapatadorPersonalizador adaptador = new AdapatadorPersonalizador(this,listaHabitaciones);
         rvHabitacion.setAdapter(adaptador);
         rvHabitacion.setLayoutManager(new LinearLayoutManager(this));
