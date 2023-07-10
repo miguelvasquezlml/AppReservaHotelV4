@@ -31,10 +31,7 @@ public class DAOTipoHabitaciones {
         try {
             Cursor c= db.rawQuery("SELECT * FROM tipoHabitaciones",null);
             while (c.moveToNext()){
-                listaTipoHabitaciones.add(new TipoHabitaciones(
-                        c.getInt(0),
-                        c.getString(1)
-                ));
+                listaTipoHabitaciones.add(new TipoHabitaciones(c.getInt(0), c.getString(1)));
             }
         }catch (Exception e){
             Log.d("==>",e.getMessage());
