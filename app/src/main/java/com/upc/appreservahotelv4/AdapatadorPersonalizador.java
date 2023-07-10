@@ -16,7 +16,6 @@ import java.util.List;
 
 public class AdapatadorPersonalizador extends RecyclerView.Adapter<AdapatadorPersonalizador.MyViewHolder>
 {
-
     private Context context;
     private List<Habitacion> listaHabitación = new ArrayList<>();
     public AdapatadorPersonalizador(Context context,List<Habitacion> listaHabitacion){
